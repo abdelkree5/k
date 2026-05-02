@@ -51,7 +51,6 @@ credit-risk-engine/
 │
 ├── src/                           # Core ML pipeline
 │   ├── data_ingestion.py         # Data loading & validation
-│   ├── data_cleaning.py          # Missing value handling, outliers
 │   ├── feature_engineering.py    # Feature creation & transformation
 │   ├── model_training.py         # Multi-model training pipeline
 │   ├── explainability.py         # SHAP, LIME explanations
@@ -66,25 +65,32 @@ credit-risk-engine/
 ├── streamlit_app/                 # Dashboard
 │   └── dashboard.py              # Interactive Streamlit app
 │
+├── docs/                          # Project Documentation
+│   ├── SETUP_INSTRUCTIONS.md     # Installation guide
+│   ├── RUN_INSTRUCTIONS.md       # Usage guide
+│   ├── DOCUMENTATION.md          # Technical docs
+│   ├── analysis.md               # ML results & analysis
+│   └── PROJECT_INFO.md           # Project background
+│
 ├── configs/                       # Configuration files
 │   ├── config.yaml               # Main configuration
-│   ├── params.yaml               # Model parameters
-│   └── schema.json               # Data schema
+│   └── params.yaml               # Model parameters
+│
+├── scripts/                       # Helper scripts
+│   ├── train.py                  # Training entry point
+│   ├── check_deps.py             # Dependency checker
+│   └── ...                       # Launchers & installers
 │
 ├── tests/                         # Unit & integration tests
-│   └── test_pipeline.py
 │
-├── notebooks/                     # Jupyter notebooks
-│   └── EDA.ipynb                 # Exploratory data analysis
-│
-├── mlruns/                        # MLflow experiment tracking
-├── models/                        # Trained model artifacts
+├── models/                        # Trained model metadata
 ├── logs/                          # Application logs
 │
 ├── requirements.txt               # Python dependencies
-├── Dockerfile                     # Docker container definition
-├── docker-compose.yml            # Multi-container orchestration
-├── .gitignore                    # Git ignore rules
+├── Dockerfile                     # Docker definition
+├── docker-compose.yml            # Docker orchestration
+├── .gitignore                    # Git rules
+├── run.bat / run.ps1             # Main launchers
 └── README.md                     # This file
 ```
 
@@ -200,11 +206,11 @@ Required input features:
 - ✅ Model versioning & audit trails
 
 ## 📖 Documentation
-
-- [API Documentation](./docs/API.md)
-- [Model Card](./docs/MODEL_CARD.md)
-- [Fairness Report](./docs/FAIRNESS_REPORT.md)
-- [Architecture Diagram](./docs/ARCHITECTURE.md)
+- [Setup & Installation](./docs/SETUP_INSTRUCTIONS.md)
+- [Running the Project](./docs/RUN_INSTRUCTIONS.md)
+- [Technical Documentation](./docs/DOCUMENTATION.md)
+- [Model Analysis Report](./docs/analysis.md)
+- [Project Overview](./docs/PROJECT_INFO.md)
 
 ## 🤝 Contributing
 

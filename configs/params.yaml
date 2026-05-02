@@ -1,0 +1,24 @@
+xgboost:
+  n_estimators: 300
+  max_depth: 6
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  random_state: 42
+  eval_metric: "logloss"
+  use_label_encoder: false
+
+lightgbm:
+  n_estimators: 300
+  max_depth: 6
+  learning_rate: 0.05
+  subsample: 0.8
+  random_state: 42
+  verbose: -1
+
+catboost:
+  iterations: 300
+  depth: 6
+  learning_rate: 0.05
+  random_state: 42
+  verbose: 0

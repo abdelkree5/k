@@ -1,0 +1,17 @@
+{
+  "age_disparate_impact": {
+    "ratio": 1.1299,
+    "compliant": true
+  },
+  "age_equal_opportunity": {
+    "difference": 0.038,
+    "compliant": true
+  },
+  "age_demographic_parity": {
+    "difference": 0.0198,
+    "compliant": true
+  },
+  "overall_default_rate": 0.162,
+  "threshold_used": 0.05,
+  "all_compliant": true
+}

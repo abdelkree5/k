@@ -1,0 +1,76 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: credit-risk-api
+    ports:
+      - "8000:8000"
+    environment:
+      - LOG_LEVEL=INFO
+      - WORKERS=1
+    volumes:
+      - ./models:/app/models
+      - ./mlruns:/app/mlruns
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - credit-risk-network
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: credit-risk-dashboard
+    ports:
+      - "8501:8501"
+    environment:
+      - LOG_LEVEL=INFO
+      - API_URL=http://api:8000
+    volumes:
+      - ./models:/app/models
+      - ./streamlit_app:/app/streamlit_app
+    depends_on:
+      - api
+    networks:
+      - credit-risk-network
+
+  # Optional: PostgreSQL for data storage
+  postgres:
+    image: postgres:15-alpine
+    container_name: credit-risk-postgres
+    environment:
+      POSTGRES_USER: credit_user
+      POSTGRES_PASSWORD: secure_password_change_me
+      POSTGRES_DB: credit_risk_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - credit-risk-network
+
+  mlflow:
+    image: python:3.10-slim
+    container_name: credit-risk-mlflow
+    command: mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlruns --host 0.0.0.0 --port 5000
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/mlruns
+    networks:
+      - credit-risk-network
+
+networks:
+  credit-risk-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

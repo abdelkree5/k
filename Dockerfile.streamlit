@@ -1,0 +1,26 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir \
+    streamlit==1.28.1 \
+    plotly==5.17.0 \
+    pandas==2.0.3 \
+    numpy==1.24.3 \
+    requests==2.31.0
+
+COPY . .
+
+RUN mkdir -p /app/models
+
+EXPOSE 8501
+
+CMD ["streamlit", "run", "streamlit_app/dashboard.py", "--server.address", "0.0.0.0", "--server.port", "8501"]

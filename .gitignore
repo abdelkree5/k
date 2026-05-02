@@ -75,7 +75,8 @@ celerybeat-schedule
 
 # Environments
 .env
-.venv
+.venv*
+.conda*
 env/
 venv/
 ENV/
@@ -113,6 +114,7 @@ data/
 # Models
 models/*.pkl
 models/*.h5
+models/*.joblib
 mlruns/
 .mlflow/
 
